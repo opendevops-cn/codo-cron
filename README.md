@@ -49,6 +49,10 @@
 ###  部署文档
 
 > <font size="4" color="#dd0000">本服务只能启用一个进程</font> 
+#### 创建数据库
+```sql
+create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_ci;
+```
 
 #### 一、docker-compose 安装（推荐）
 
@@ -61,7 +65,10 @@
 > 建议使用虚拟环境
 
 - 修改配置文件
-- 安装依赖  pip3 install -r  doc/requirements.txt
+- 安装依赖  具体参考 Dockerfile
+- - pip3 install --user --upgrade pip
+- - pip3 install -U git+https://github.com/ss1917/ops_sdk.git
+- - pip3 install -r /var/www/do_cron/doc/requirements.txt
 - 从doc目录获取supervisor配置文件  使用 supervisor启动  supervisorctl reload 
 
 #### 三、测试api
