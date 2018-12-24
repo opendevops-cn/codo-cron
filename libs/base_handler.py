@@ -10,6 +10,12 @@ from tornado.web import HTTPError
 class BaseHandler(SDKBaseHandler):
     def __init__(self, *args, **kwargs):
         self.new_csrf_key = str(shortuuid.uuid())
+        self.user_id = None
+        self.username = None
+        self.nickname = None
+        self.is_super = False
+        self.is_superuser = self.is_super
+
         super(BaseHandler, self).__init__(*args, **kwargs)
 
     def prepare(self):
@@ -28,42 +34,8 @@ class BaseHandler(SDKBaseHandler):
         self.set_cookie('csrf_key', self.new_csrf_key)
 
         ### 登陆验证
-        # auth_key = self.get_cookie('auth_key', None)
-        #
-        # if not auth_key or not self.get_secure_cookie("user_id"):
-        #     # 没登录，就让跳到登陆页面
-        #     raise HTTPError(401, 'auth failed')
+        auth_key = self.get_cookie('auth_key', None)
 
-
-    def get_current_user(self):
-        return self.get_secure_cookie("username")
-
-    def get_current_id(self):
-        return self.get_secure_cookie("user_id")
-
-    def get_current_nickname(self):
-        return self.get_secure_cookie("nickname")
-
-    def write_error(self, status_code, **kwargs):
-        if status_code == 404:
-            self.set_status(status_code)
-            return self.render('404.html')
-
-        elif status_code == 400:
-            self.set_status(status_code)
-            return self.finish('bad request')
-
-        elif status_code == 403:
-            self.set_status(status_code)
-            return self.finish('Sorry, you have no permission. Please contact the administrator')
-
-        elif status_code == 500:
-            self.set_status(status_code)
-            return self.finish('服务器内部错误')
-
-        elif status_code == 401:
-            self.set_status(status_code)
-            return self.redirect("/login/")
-
-        else:
-            self.set_status(status_code)
+        if not auth_key:
+            # 没登录，就让跳到登陆页面
+            raise HTTPError(401, 'auth failed')
