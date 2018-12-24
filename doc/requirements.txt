@@ -1,4 +1,4 @@
-tornado==5.0.2
+tornado==5.0
 pycurl==7.43
 shortuuid==0.5.0
 pymysql==0.9.3

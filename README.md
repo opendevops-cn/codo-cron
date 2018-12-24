@@ -63,9 +63,9 @@ create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_
 #### 二、本地安装
 
 > 建议使用虚拟环境
-
+> 具体参考Dockerfile 内的安装步骤
 - 修改配置文件
-- 安装依赖  具体参考 Dockerfile
+- 安装依赖 
 - - pip3 install --user --upgrade pip
 - - pip3 install -U git+https://github.com/ss1917/ops_sdk.git
 - - pip3 install -r /var/www/do_cron/doc/requirements.txt

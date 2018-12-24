@@ -20,7 +20,7 @@ RUN mkdir -p /var/www/
 ADD . /var/www/do_cron/
 
 # 5. 安装pip依赖
-RUN pip3 install --user --upgrade pip
+RUN pip3 install --upgrade pip
 RUN pip3 install -U git+https://github.com/ss1917/ops_sdk.git
 RUN pip3 install -r /var/www/do_cron/doc/requirements.txt
 
