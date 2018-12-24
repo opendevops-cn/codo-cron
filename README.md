@@ -59,6 +59,7 @@ create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_
 - 修改settings 配置 主要是MySQL数据库和redis 配置
 - 执行 docker build . -t do_cron_image
 - docker-compose up -d
+- 启动成功默认地址为 ip:9900
 
 #### 二、本地安装
 
@@ -71,7 +72,30 @@ create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_
 - - pip3 install -r /var/www/do_cron/doc/requirements.txt
 - 从doc目录获取supervisor配置文件  使用 supervisor启动  supervisorctl reload 
 
-#### 三、测试api
+#### 三、api文档 暂无
+
+#### 四、服务注册（如果需要结合权限则需要注册）
+> 示例
+```
+rewrite_conf = {
+    [gw_domain_name] = {
+        rewrite_urls = {
+            {
+                uri = "/cron",
+                rewrite_upstream = "10.2.2.236:9900"
+            },
+            {
+                uri = "/mg",
+                rewrite_upstream = "mg.opendevops.cn:8010"
+            },
+            {
+                uri = "/accounts",
+                rewrite_upstream = "mg.opendevops.cn:8010"
+            },
+        }
+    }
+}
+```
 
 - 暂无
 

@@ -3,7 +3,7 @@ do_cron:
   image: do_cron_image
   volumes:
     - /var/log/supervisor/:/var/log/supervisor/
-    - /root/ops_scripts:/root/ops_scripts
+    - /opt/ops_scripts:/opt/ops_scripts
     - /sys/fs/cgroup:/sys/fs/cgroup
   ports:
     - "9900:9900"
