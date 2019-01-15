@@ -25,7 +25,7 @@ RUN pip3 install -U git+https://github.com/ss1917/ops_sdk.git
 RUN pip3 install -r /var/www/do_cron/doc/requirements.txt
 
 # 6. 初始化生成表结构
-RUN python3 /var/www/do_cron/db_sync.py
+# RUN python3 /var/www/do_cron/db_sync.py
 
 # 7. 日志
 VOLUME /var/log/

@@ -8,6 +8,7 @@ from libs.db_context import get_db_url
 from websdk.application import Application as myApp
 from cron.cron_jobs import *
 from websdk.web_logs import ins_log
+from websdk.base_handler import LivenessProbe
 from apscheduler.schedulers.tornado import TornadoScheduler
 from libs.base_handler import BaseHandler
 from models.cron import CronLog, model_to_dict
@@ -186,6 +187,7 @@ class Application(myApp):
 cron_urls = [
     (r"/v1/cron/job/", CronJobs),
     (r"/v1/cron/log/", CronLogs),
+    (r"/are_you_ok/", LivenessProbe),
 ]
 
 if __name__ == '__main__':
