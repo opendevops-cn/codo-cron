@@ -56,7 +56,7 @@ create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_
 
 #### 一、docker-compose 安装（推荐）
 
-- 修改settings 配置 主要是MySQL数据库和redis 配置
+- 修改settings 配置 主要是MySQL数据库和redis配置
 - 执行 docker build . -t do_cron_image
 - docker-compose up -d
 - 启动成功默认地址为 ip:9900
@@ -70,7 +70,7 @@ create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_
 - - pip3 install --user --upgrade pip
 - - pip3 install -U git+https://github.com/ss1917/ops_sdk.git
 - - pip3 install -r /var/www/do_cron/doc/requirements.txt
-- 从doc目录获取supervisor配置文件  使用 supervisor启动  supervisorctl reload 
+- 从doc目录获取supervisor配置文件  使用 supervisor启动  supervisorctl restart 
 
 #### 三、api文档 暂无
 
