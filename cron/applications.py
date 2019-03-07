@@ -84,9 +84,9 @@ class CronJobs(BaseHandler):
         data = json.loads(self.request.body.decode("utf-8"))
         job_id = data.get('job_id')
         if not job_id:
-            return self.write(dict(status=-1, msg='job id 不能为空'))
+            return self.write(dict(code=-1, msg='job id 不能为空'))
         scheduler.remove_job(job_id)
-        return self.write(dict(status=0, msg='删除成功', job_id=job_id))
+        return self.write(dict(code=0, msg='删除成功', job_id=job_id))
 
     def patch(self, *args, **kwargs):
         """暂停作业/恢复作业"""
@@ -113,7 +113,7 @@ class CronJobs(BaseHandler):
             except Exception as e:
                 response = dict(code=-3, msg="job {} {}".format(job_id, str(e)))
             return self.write(response)
-        return self.write(dict(status=-4, msg='失败了'))
+        return self.write(dict(code=-4, msg='失败了'))
 
 
 class CronLogs(BaseHandler):

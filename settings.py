@@ -11,7 +11,7 @@ from websdk.consts import const
 
 ROOT_DIR = os.path.dirname(__file__)
 debug = True
-xsrf_cookies = False
+xsrf_cookies = True
 expire_seconds = 365 * 24 * 60 * 60
 cookie_secret = '61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2X6TP1o/Vo='
 
@@ -26,13 +26,6 @@ READONLY_DB_DBPORT = os.getenv('READONLY_DB_DBPORT', '3306')
 READONLY_DB_DBUSER = os.getenv('READONLY_DB_DBUSER', 'root')
 READONLY_DB_DBPWD = os.getenv('READONLY_DB_DBPWD', 'ljXrcyn7chaBU4F')
 READONLY_DB_DBNAME = os.getenv('READONLY_DB_DBNAME', 'do_cron')
-
-DEFAULT_REDIS_HOST = os.getenv('DEFAULT_REDIS_HOST', '172.16.0.223')
-DEFAULT_REDIS_PORT = os.getenv('DEFAULT_REDIS_PORT', '6379')
-DEFAULT_REDIS_DB = 8
-DEFAULT_REDIS_AUTH = True
-DEFAULT_REDIS_CHARSET = 'utf-8'
-DEFAULT_REDIS_PASSWORD = os.getenv('DEFAULT_REDIS_PASSWORD', '123456')
 
 try:
     from local_settings import *
@@ -59,16 +52,6 @@ settings = dict(
             const.DBUSER_KEY: READONLY_DB_DBUSER,
             const.DBPWD_KEY: READONLY_DB_DBPWD,
             const.DBNAME_KEY: READONLY_DB_DBNAME,
-        }
-    },
-    redises={
-        const.DEFAULT_RD_KEY: {
-            const.RD_HOST_KEY: DEFAULT_REDIS_HOST,
-            const.RD_PORT_KEY: DEFAULT_REDIS_PORT,
-            const.RD_DB_KEY: DEFAULT_REDIS_DB,
-            const.RD_AUTH_KEY: DEFAULT_REDIS_AUTH,
-            const.RD_CHARSET_KEY: DEFAULT_REDIS_CHARSET,
-            const.RD_PASSWORD_KEY: DEFAULT_REDIS_PASSWORD
         }
     }
 )

@@ -1,43 +1,31 @@
 #!/usr/bin/env python
 # -*-coding:utf-8-*-
 
-import shortuuid
-from websdk.cache import get_cache
-from websdk.base_handler import BaseHandler as SDKBaseHandler
+
+import jwt
 from tornado.web import HTTPError
+from websdk.base_handler import BaseHandler as SDKBaseHandler
 
 
 class BaseHandler(SDKBaseHandler):
     def __init__(self, *args, **kwargs):
-        self.new_csrf_key = str(shortuuid.uuid())
         super(BaseHandler, self).__init__(*args, **kwargs)
 
     def prepare(self):
-        # 验证客户端CSRF，如请求为GET，则不验证，否则验证。最后将写入新的key
-        cache = get_cache()
-        if self.request.method != 'GET':
-            csrf_key = self.get_cookie('csrf_key')
-            pipeline = cache.get_pipeline()
-            result = cache.get(csrf_key, private=False, pipeline=pipeline)
-            cache.delete(csrf_key, private=False, pipeline=pipeline)
-            if result != '1':
-                raise HTTPError(400, 'csrf error')
-
-        cache.set(self.new_csrf_key, 1, expire=1800, private=False)
-        self.set_cookie('csrf_key', self.new_csrf_key)
-
         ### 登陆验证
         auth_key = self.get_cookie('auth_key', None)
+        self.xsrf_token
         if not auth_key:
             # 没登录，就让跳到登陆页面
-            raise HTTPError(401, 'auth failed')
+            raise HTTPError(401, 'auth failed 1')
+        else:
+            user_info = jwt.decode(auth_key, verify=False).get('data')
+            self.user_id = user_info.get('user_id', None)
+            self.username = user_info.get('username', None)
+            self.nickname = user_info.get('nickname', None)
+            self.is_super = user_info.get('is_superuser', False)
 
+            if not self.user_id:
+                raise HTTPError(401, 'auth failed 2')
 
-    def get_current_user(self):
-        return self.get_secure_cookie("username")
-
-    def get_current_id(self):
-        return self.get_secure_cookie("user_id")
-
-    def get_current_nickname(self):
-        return self.get_secure_cookie("nickname")
+        self.is_superuser = self.is_super
