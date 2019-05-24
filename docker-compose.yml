@@ -1,4 +1,4 @@
-codo-cron:
+codo_cron:
   restart: unless-stopped
   image: codo_cron_image
   volumes:

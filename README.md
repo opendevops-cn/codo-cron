@@ -56,7 +56,7 @@ create database `codo_cron` default character set utf8mb4 collate utf8mb4_unicod
 
 #### 一、docker-compose 安装（推荐）
 
-- 修改settings 配置 主要是MySQL数据库和redis配置
+- 修改settings 配置 主要是MySQL数据库配置
 - 执行 docker build . -t codo_cron_image
 - docker-compose up -d
 - 启动成功默认地址为 ip:9900

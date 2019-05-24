@@ -1,5 +1,2 @@
-tornado
-pycurl
-redis==2.10.6
 fire
 apscheduler
