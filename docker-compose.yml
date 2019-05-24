@@ -1,6 +1,6 @@
-do_cron:
+codo-cron:
   restart: unless-stopped
-  image: do_cron_image
+  image: codo_cron_image
   volumes:
     - /var/log/supervisor/:/var/log/supervisor/
     - /opt/ops_scripts:/opt/ops_scripts

@@ -51,13 +51,13 @@
 > <font size="4" color="#dd0000">本服务只能启用一个进程</font> 
 #### 创建数据库
 ```sql
-create database `do_cron` default character set utf8mb4 collate utf8mb4_unicode_ci;
+create database `codo_cron` default character set utf8mb4 collate utf8mb4_unicode_ci;
 ```
 
 #### 一、docker-compose 安装（推荐）
 
 - 修改settings 配置 主要是MySQL数据库和redis配置
-- 执行 docker build . -t do_cron_image
+- 执行 docker build . -t codo_cron_image
 - docker-compose up -d
 - 启动成功默认地址为 ip:9900
 

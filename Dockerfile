@@ -19,13 +19,13 @@ RUN pip3 install -U git+https://github.com/ss1917/ops_sdk.git
 
 # 4. 复制代码
 RUN mkdir -p /var/www/
-ADD . /var/www/codo_cron/
+ADD . /var/www/codo-cron/
 
 # 5. 安装pip依赖
-RUN pip3 install -r /var/www/codo_cron/doc/requirements.txt
+RUN pip3 install -r /var/www/codo-cron/doc/requirements.txt
 
 # 6. 初始化生成表结构
-# RUN python3 /var/www/codo_cron/db_sync.py
+# RUN python3 /var/www/codo-cron/db_sync.py
 
 # 7. 日志
 VOLUME /var/log/
