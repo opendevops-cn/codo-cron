@@ -31,13 +31,19 @@ def job_from(**jobargs):
 
 class CronJobs(BaseHandler):
     def get(self, *args, **kwargs):
+        page_size = self.get_argument('page', default=1, strip=True)
+        limit = self.get_argument('limit', default=15, strip=True)
         job_id = self.get_argument('job_id', default=None, strip=True)
+
+        limit_start = (int(page_size) - 1) * int(limit)
+        limit_end = int(page_size) * int(limit)
         info_list = []
         try:
             if not job_id:
                 ret_list = scheduler.get_jobs()
             else:
                 ret_list = [scheduler.get_job(job_id)]
+                limit_start = 0
             for ret in ret_list:
                 fields = ret.trigger.fields
                 cron = {}
@@ -53,9 +59,10 @@ class CronJobs(BaseHandler):
                         "day") + " " + cron.get("month") + " " + cron.get("day_of_week")
                 }
                 info_list.append(info)
-            return self.write(dict(code=0, msg='获取成功', data=info_list))
+
+            return self.write(dict(code=0, msg='获取成功', data=info_list[limit_start:limit_end], count=len(info_list)))
         except Exception as e:
-            return self.write(dict(code=-1, msg=str(e)))
+            return self.write(dict(code=-1, msg="错误 " + str(e)))
 
     def post(self, *args, **kwargs):
         data = json.loads(self.request.body.decode("utf-8"))
