@@ -1,0 +1,5 @@
+codo_cron:
+  restart: unless-stopped
+  image: codo_cron_image
+  ports:
+    - "9900:9900"
