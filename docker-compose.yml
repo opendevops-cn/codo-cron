@@ -1,9 +1,0 @@
-codo_cron:
-  restart: unless-stopped
-  image: codo_cron_image
-  volumes:
-    - /var/log/supervisor/:/var/log/supervisor/
-    - /opt/ops_scripts:/opt/ops_scripts
-    - /sys/fs/cgroup:/sys/fs/cgroup
-  ports:
-    - "9900:9900"
